@@ -1,3 +1,4 @@
+import base64
 from concurrent import futures
 import time
 
@@ -34,17 +35,9 @@ class GreeterServicer(stream_pb2_grpc.GreeterServicer):
         full_reply_content = ''.join(
             [m.get('content', '') for m in collected_messages])
 
-        return stream_pb2.StreamResData(data=f"Response {full_reply_content}")
+        encoded_data = base64.b64encode(full_reply_content.encode('utf-8'))
 
-    def PutStream(self, request_iterator, context):
-        res_data = stream_pb2.StreamResData(data='Received data')
-        return res_data
-
-    def AllStream(self, request_iterator, context):
-        for request in request_iterator:
-            res_data = stream_pb2.StreamResData(
-                data=f'Received data: {request.data}')
-            yield res_data
+        context.set_trailing_metadata([('returned_data', encoded_data)])
 
 
 def serve():
