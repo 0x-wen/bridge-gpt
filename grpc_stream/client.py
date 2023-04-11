@@ -1,3 +1,4 @@
+import base64
 import grpc
 
 from proto import stream_pb2, stream_pb2_grpc
@@ -13,6 +14,14 @@ def run():
         for res in response_iterator:
             print(f'GetStream: {res.data}')
 
+        # Get the returned data from the trailing metadata
+        returned_data = None
+        for key, value in response_iterator.trailing_metadata():
+            if key == 'returned_data':
+                returned_data = base64.b64decode(value)
+                break
+
+        print(f'Returned data: {returned_data.decode("utf-8")}')
 
 
 if __name__ == '__main__':
