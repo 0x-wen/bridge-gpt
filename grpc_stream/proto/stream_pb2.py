@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0cstream.proto\"\x1d\n\rStreamReqData\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\t\"\x1d\n\rStreamResData\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\t28\n\x07Greeter\x12-\n\tGetStream\x12\x0e.StreamReqData\x1a\x0e.StreamResData0\x01\x42\nZ\x08../protob\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0cstream.proto\"(\n\x07Message\x12\x0c\n\x04role\x18\x01 \x01(\t\x12\x0f\n\x07\x63ontent\x18\x02 \x01(\t\"\xb7\x02\n\x07ReqData\x12\r\n\x05model\x18\x01 \x01(\t\x12\x1a\n\x08messages\x18\x02 \x03(\x0b\x32\x08.Message\x12\x13\n\x0btemperature\x18\x03 \x01(\x01\x12\r\n\x05top_p\x18\x04 \x01(\x01\x12\t\n\x01n\x18\x05 \x01(\x12\x12\x0e\n\x06stream\x18\x06 \x01(\x08\x12\x0c\n\x04stop\x18\x07 \x01(\t\x12\x12\n\nmax_tokens\x18\x08 \x01(\x12\x12\x18\n\x10presence_penalty\x18\t \x01(\x01\x12\x19\n\x11\x66requency_penalty\x18\n \x01(\x01\x12+\n\nlogit_bias\x18\x0b \x03(\x0b\x32\x17.ReqData.LogitBiasEntry\x12\x0c\n\x04user\x18\x0c \x01(\t\x1a\x30\n\x0eLogitBiasEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x01:\x02\x38\x01\"\x17\n\x07ResData\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\t2,\n\x07Greeter\x12!\n\tGetStream\x12\x08.ReqData\x1a\x08.ResData0\x01\x42\nZ\x08../protob\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'stream_pb2', globals())
@@ -21,10 +21,16 @@ if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   DESCRIPTOR._serialized_options = b'Z\010../proto'
-  _STREAMREQDATA._serialized_start=16
-  _STREAMREQDATA._serialized_end=45
-  _STREAMRESDATA._serialized_start=47
-  _STREAMRESDATA._serialized_end=76
-  _GREETER._serialized_start=78
-  _GREETER._serialized_end=134
+  _REQDATA_LOGITBIASENTRY._options = None
+  _REQDATA_LOGITBIASENTRY._serialized_options = b'8\001'
+  _MESSAGE._serialized_start=16
+  _MESSAGE._serialized_end=56
+  _REQDATA._serialized_start=59
+  _REQDATA._serialized_end=370
+  _REQDATA_LOGITBIASENTRY._serialized_start=322
+  _REQDATA_LOGITBIASENTRY._serialized_end=370
+  _RESDATA._serialized_start=372
+  _RESDATA._serialized_end=395
+  _GREETER._serialized_start=397
+  _GREETER._serialized_end=441
 # @@protoc_insertion_point(module_scope)

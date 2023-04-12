@@ -2,13 +2,29 @@ syntax = "proto3";
 
 option go_package="../proto";
 service Greeter {
-    rpc GetStream(StreamReqData) returns (stream StreamResData); //服务端流模式
+    rpc GetStream(ReqData) returns (stream ResData); 
 }
 
-message StreamReqData {
-    string data = 1;
+message Message {
+    string role = 1;
+    string content = 2;
 }
 
-message StreamResData {
+message ReqData {
+    string model = 1;
+    repeated Message messages = 2;
+    double temperature = 3;
+    double top_p = 4;
+    sint64 n = 5;
+    bool stream = 6;
+    string stop = 7;
+    sint64 max_tokens = 8;
+    double presence_penalty = 9;
+    double frequency_penalty = 10;
+    map<string, double> logit_bias = 11;
+    string user = 12;
+}
+
+message ResData {
     string data = 1;
 }

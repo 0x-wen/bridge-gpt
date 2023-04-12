@@ -16,8 +16,8 @@ class GreeterStub(object):
         """
         self.GetStream = channel.unary_stream(
                 '/Greeter/GetStream',
-                request_serializer=stream__pb2.StreamReqData.SerializeToString,
-                response_deserializer=stream__pb2.StreamResData.FromString,
+                request_serializer=stream__pb2.ReqData.SerializeToString,
+                response_deserializer=stream__pb2.ResData.FromString,
                 )
 
 
@@ -25,8 +25,7 @@ class GreeterServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def GetStream(self, request, context):
-        """服务端流模式
-        """
+        """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -36,8 +35,8 @@ def add_GreeterServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetStream': grpc.unary_stream_rpc_method_handler(
                     servicer.GetStream,
-                    request_deserializer=stream__pb2.StreamReqData.FromString,
-                    response_serializer=stream__pb2.StreamResData.SerializeToString,
+                    request_deserializer=stream__pb2.ReqData.FromString,
+                    response_serializer=stream__pb2.ResData.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -61,7 +60,7 @@ class Greeter(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_stream(request, target, '/Greeter/GetStream',
-            stream__pb2.StreamReqData.SerializeToString,
-            stream__pb2.StreamResData.FromString,
+            stream__pb2.ReqData.SerializeToString,
+            stream__pb2.ResData.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

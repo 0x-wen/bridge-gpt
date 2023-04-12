@@ -9,14 +9,26 @@ from proto import stream_pb2, stream_pb2_grpc
 import config
 
 
+def convert_req_data_to_dict_list(req_data):
+    dict_list = []
+    for msg in req_data:
+        dict_list.append({
+            "role": msg.role,
+            "content": msg.content,
+        })
+    return dict_list
+
+
 class GreeterServicer(stream_pb2_grpc.GreeterServicer):
 
     def GetStream(self, request, context):
+        model = request.model
+        messages = convert_req_data_to_dict_list(request.messages)
+        print(messages, type(messages))
+
         response = openai.ChatCompletion.create(
-            model='gpt-3.5-turbo',
-            messages=[
-                {'role': 'user', 'content': '你好'}
-            ],
+            model=model,
+            messages=messages,
             temperature=0,
             stream=True  # again, we set stream=True
         )
@@ -27,8 +39,7 @@ class GreeterServicer(stream_pb2_grpc.GreeterServicer):
             collected_chunks.append(chunk)
             chunk_message = chunk['choices'][0]['delta']
             collected_messages.append(chunk_message)
-            res_data = stream_pb2.StreamResData(
-                data=f"Response {chunk_message}")
+            res_data = stream_pb2.ResData(data=f"Response {chunk_message}")
             time.sleep(0.5)
             yield res_data
 
